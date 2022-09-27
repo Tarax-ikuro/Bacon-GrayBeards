@@ -1,0 +1,186 @@
+L'AUTHENTIFICATION MULTIFACTEUR ET MOTS DE PASSE :
+
+Il s'agit d'un processus de vérification de l'identité. Ce processus peut-être "simple" ou "multifacteurs".
+L’authentification est un mécanisme faisant intervenir deux entités distinctes : un prouveur et un vérifieur :
+
+ ✔️Le prouveur cherche à prouver son identité au vérifieur. Il s’agit par exemple pour le prouveur
+de démontrer sa connaissance d’une donnée secrète comme un mot de passe.
+ ✔️ Le vérifieur doit être capable de s’assurer de la validité de l’identité du prouveur. Il s’agit par
+exemple pour le vérifieur de contrôler l’exactitude du mot de passe fourni par le prouveur.
+
+Une étape préalable à l’authentification est l’étape de l’enregistrement. Cette étape consiste à
+enregistrer un prouveur (son identité, son moyen d’authentification, etc.) auprès d’un vérifieur.
+Cela correspond par exemple à la création d’un compte sur un site Web.
+L’authentification est précédée par une phase d’identification (parfois implicite) qui consiste, pour
+le prouveur, à annoncer son identité sans prouver cette dernière. Par exemple, il peut s’agir d’un
+nom d’utilisateur à renseigner.
+
+Le prouveur va ainsi prouver son identité au vérifieur grâce à un moyen d’authentification, élément qui est généralement connu ou possédé uniquement par le prouveur et qui permet de l’authentifier de manière unique. Ce moyen d’authentification peut prendre par exemple la forme d’un
+mot de passe, d’une donnée biométrique ou bien de la clé privée associée à un certificat électronique contenu dans une carte à puce. Le moyen d’authentification est créé lors de l’enregistrement.
+Une fois l’authentification réalisée, cette dernière (ou un autre service) va permettre d’autoriser
+l’accès d’un utilisateur (selon des critères propres à chaque utilisateur) à des ressources (données,
+services, applications, etc.).
+Prenons l’exemple d’une authentification basique comme l’utilisation du couple nom d’utilisateur/-
+mot de passe pour accéder à une application Web. Cette authentification met en jeu un nom d’utilisateur qui est utilisé pour identifier l’utilisateur. Le moyen d’authentification est ici la connaissance
+du mot de passe qui sert ainsi à prouver l’identité précédemment annoncée. Une fois l’authentification vérifiée, l’accès à l’application Web est autorisé.
+
+Authentification Simple :
+
+Le couple identifiant et mot de passe est le moyen d’authentification le plus répandu, une des
+raisons principales étant sa facilité de mise en œuvre et d’utilisation. En effet, du point de vue
+de l’utilisateur, il s’agit simplement de mémoriser un mot ou une phrase de passe, et de saisir cet
+élément secret mémorisé au moment d’une authentification. 
+Du point de vue de l’administration ou du développement, la gestion se révèle également plutôt simple : cela consiste à calculer des empreintes cryptographiques des mots de passe et à les comparer avec celles présentes dans une
+base de données afin de valider ou invalider l’authentification.
+
+Cette simplicité d’utilisation est néanmoins contrebalancée par des limitations en termes de sécurité. La mémorisation des mots de passe est une des principales limitations de cette méthode d’authentification ayant de forts impacts en matière de sécurité.
+Une des bonnes pratiques concernant la gestion des mots de passe est d’utiliser des mots de passe différents pour chaque service ou compte.
+Le nombre de mots de passe à retenir pouvant alors devenir élevé, le comportement des utilisateurs est généralement de choisir des mots de passe facilement mémorisables, par exemple provenant d’informations personnelles (date de naissance, nom de famille, etc.), de mots provenant du dictionnaire de leur langue, ou encore des mots de passe très
+utilisés (« motdepasse », « azerty », « 123456 », etc.).
+Les mots de passe créés de cette manière sont très facilement exploitables par des attaquants : un mot de passe appartenant à ces catégories sera « cassé » (c.-à-d. retrouvé par un attaquant) en quelques minutes.
+
+Une autre bonne pratique est de choisir des mots de passe dits robustes :
+ils doivent être suffisamment longs, suffisamment complexes (avec l’utilisation de minuscules, majuscules, chiffres et caractères spéciaux). Un mot de passe sera d’autant plus robuste qu’il aura été généré de manière aléatoire.
+Néanmoins, étant donné le grand nombre de comptes et de services pour lesquels un utilisateur doit s’authentifier à des fréquences variables, mémoriser un grand nombre de mots de passe robustes peut s’avérer difficile, voire impossible s’ils sont aléatoires. 
+
+La gestion et la mémorisation d’un grand nombre de mots de passe aléatoires et robustes étant difficilement envisageable sans l’aide d’un outil de gestion de mots de passe comme un coffre-fort de mots de passe, les personnes soumises à ce type de contraintes auront la fâcheuse tendance à utiliser un même mot de passe pour s’authentifier sur plusieurs services ou comptes différents.
+L’utilisation d’un même mot de passe sur plusieurs services peut devenir très problématique en
+cas d’incident de sécurité impliquant les serveurs où le vérifieur stocke les données (c.-à-d. les empreintes cryptographiques des mots de passe) lui permettant de valider l’authentification. L’accès à ces données très sensibles n’est parfois pas correctement protégé, ce qui peut conduire à d’importantes brèches de sécurité : par exemple la fuite d’une base de données pouvant contenir des millions de mots de passe d’utilisateurs. La réutilisation d’un même mot de passe devient ainsi problématique lors de tels incidents et va impacter les différents services ou comptes partageant
+un même mot de passe, que le mot de passe soit robuste (et même aléatoire) ou non.
+
+L’utilisation d’un coffre-fort de mots de passe est une solution intéressante aux problèmes de mémorisation de multiples mots de passe robustes. Un coffre-fort de mots de passe permet de stocker des mots de passe sans que l’utilisateur ait besoin de les mémoriser. 
+De nombreux coffres-forts de mots de passe offrent également la possibilité de générer des mots de passe robustes. Ces mots de passe sont alors conservés dans une base de données dédiée et chiffrée par un mot de passe dit « maître », le seul qui doit alors être mémorisé par l’utilisateur.
+
+Néanmoins, ce type d’outil ne permet pas d’empêcher les attaques d’ingénierie sociale comme
+l’hameçonnage. Ce genre d’attaque permet de récupérer en particulier les mots de passe en usant
+de moyens détournés : convaincre une personne par téléphone ou courriel d’envoyer son mot de
+passe, inciter une personne à cliquer sur un lien frauduleux falsifiant une vraie page d’authentification, etc. Également, ces outils restent assez sensibles à la compromission par des logiciels malveillants (comme des enregistreurs de frappe ou keylogger en anglais) des équipements sur lesquels ils sont installés.
+
+
+Authentification multifacteurs :
+
+L’authentification multifacteur découle de la nécessité de renforcer la sécurité apportée par l’utilisation d’un unique facteur d’authentification, particulièrement lorsqu’il s’agit d’un mot de passe
+utilisé seul. Ainsi même si ce dernier est compromis, un facteur supplémentaire d’un type différent
+est requis afin de s’authentifier.
+
+Un facteur d’authentification est donc un facteur lié à une personne, relevant de diverses catégories :
+
+✔️Facteur de connaissance : 
+« ce que je sais », il s’agit d’une connaissance devant être mémorisée telle qu’une phrase de passe, un mot de passe, un code etc...
+
+✔️Facteur de possession :
+ « ce que je possède », il s’agit d’un élément secret non mémorisable contenu dans un objet physique qui idéalement protège cet élément de toute extraction, tel qu’une carte à puce, un token, un téléphone etc...
+
+✔️Facteur inhérent :
+ « ce que je suis », il s’agit d’une caractéristique physique intrinsèquement
+liée à une personne et indissociable de la personne elle-même, telle qu’une caractéristique biologique (ADN), morphologique (empreinte digitale, empreinte rétinienne) ou comportementale (voix, frappe au clavier).
+
+
+
+
+La principale menace contre laquelle l’authentification cherche à se protéger est l’usurpation d’identité, qui consiste pour un attaquant à se faire passer pour un utilisateur légitime auprès du vérifieur.
+
+Il est possible de distinguer deux grands types d’attaquants.
+✔️Attaquant en ligne : l’attaquant peut uniquement interagir avec le serveur d’authentification
+pour tenter de retrouver une valeur secrète (un mot de passe ou une clé privée par exemple).
+Il doit par exemple être capable d’interagir avec un serveur Web afin de réaliser son attaque.
+Se protéger contre des attaquants en ligne nécessite de mettre en place des mesures spécifiques,
+comme le blocage temporaire de l’accès au compte pendant plusieurs secondes, voire minutes,
+après un certain nombre d’essais infructueux.
+✔️Attaquant hors ligne : l’attaquant peut interagir avec le serveur d’authentification, et a également accès aux données permettant au vérifieur de contrôler l’identité du prouveur (par
+exemple des empreintes de mots de passe ou une clé publique). L’attaquant n’a pas besoin d’interagir avec le serveur pour réaliser son attaque et a alors accès à une puissance de calcul potentiellement très importante.
+
+Se protéger contre des attaquants hors ligne nécessite que le vérifieur protège correctement
+les données permettant de contrôler l’identité des utilisateurs lors de l’authentification, par exemple en utilisant des fonctions de hachage dédiées pour le stockage des mots de passe ou en utilisant des protocoles d’authentification considérés comme forts.
+
+De nombreux types d’attaques peuvent être menés contre un protocole d’authentification pour
+parvenir à usurper une identité. Nous pouvons citer :
+
+✔️ Les attaques par force brute : tests automatisés de tous les mots de passe et de toutes les clés
+cryptographiques possibles.
+
+✔️Les attaques sur le protocole d’authentification : attaques de l’homme-du-milieu, attaques par
+rejeu, exploitation de vulnérabilité de l’implémentation etc...
+
+✔️Le vol du moyen d’authentification : vol d’une carte à puce, récupération d’un mot de passe par
+hameçonnage, manipulation par l’ingénierie sociale, etc...
+
+Certains protocoles d’authentification prennent en compte ces différentes attaques alors que d’autres
+méthodes nécessitent des mesures complémentaires afin d’en atténuer les conséquences.
+
+- Facteurs de connaissance :
+
+Les principales menaces pesant sur les facteurs de connaissance sont la déduction (au moyen d’attaques par recherche exhaustive ou par dictionnaire par exemple), l’hameçonnage, l’écoute (dans
+le cas où l’envoi du facteur de connaissance est effectué au travers d’un canal non protégé), etc...
+
+Les mots de passe, souvent choisis par les utilisateurs, font ainsi face à des attaques spécifiques :
+
+✔️Attaque par recherche exhaustive. Cette attaque consiste à choisir un ensemble de caractères
+et à tester automatiquement toutes les combinaisons possibles de ces caractères. Une variante
+de cette attaque, désignée par l’expression anglaise password spraying, consiste à effectuer des
+tests automatisés d’un nombre réduit de mots de passe (par exemple à partir d’une liste de
+mots de passe très utilisés) mais pour un grand nombre d’identifiants possibles (ou de comptes
+de différents service web par exemple).
+
+✔️ Attaque par dictionnaire. Cette attaque consiste à faire l’hypothèse que le mot de passe recherché est un mot du dictionnaire d’une langue donnée et à tester automatiquement chacun de ces mots. Des dictionnaires plus aboutis intègrent également des variations courantes sur les mots du dictionnaire (transformation de a en @ par exemple), une liste des mots de passe ou des phrases de passe les plus utilisés ou bien encore une combinaison (concaténation, etc.) de
+mots connus.
+
+✔️Attaque par tables pré-calculées (par exemple les rainbow tables). Cette attaque consiste à
+calculer à l’avance 3 les empreintes cryptographiques d’un très vaste ensemble de mots de passe afin d’accélérer leur recherche, puis de comparer automatiquement chacune d’entre elles à une empreinte volée jusqu’à trouver une égalité qui prouvera que le mot de passe recherché a été trouvé.
+
+✔️Attaque par ingénierie sociale. Cette attaque consiste à récupérer un mot de passe par des
+moyens détournés comme l’hameçonnage ou bien l’usurpation d’identité.
+
+
+- Facteurs de possession :
+
+Les principales menaces pesant sur les facteurs de possession sont le vol, la perte, la duplication,
+la falsification ou bien encore la compromission totale de l’équipement qui porte le facteur de
+possession. Afin de réaliser une usurpation d’identité, les attaquants vont chercher à récupérer les
+secrets cryptographiques contenus dans le facteur de possession via par exemple des attaques par
+canaux auxiliaires.
+
+
+- Facteurs inhérent :
+
+Les principales menaces pesant sur les facteurs inhérents (couramment appelés facteurs biométriques) visent à leurrer le mécanisme de reconnaissance biométrique en usurpant l’identité de la
+personne physique, par exemple par la présentation d’une photographie ou d’une séquence vidéo
+préenregistrée ou altérée, ou d’un moulage de l’empreinte digitale.
+
+
+
+Authentification forte VS authentification multifacteur :
+
+Il convient de différencier authentification multifacteur et authentification forte. 
+D’une part, une authentification multifacteur est une authentification faisant intervenir plusieurs catégories
+de facteurs.
+Néanmoins, ces facteurs, pris indépendamment ou ensemble, ne sont pas forcément considérés comme étant forts (un exemple typique étant un mot de passe associé à un code temporaire reçu par SMS). D’autre part, une authentification forte (qui repose généralement sur un facteur unique) est une authentification reposant sur un mécanisme cryptographique dont les paramètres et la sécurité sont jugés robustes (l’élément secret est alors généralement une clé cryptographique).
+
+Les protocoles d’authentification que l’on peut considérer comme forts reposent souvent sur des
+protocoles dits défi-réponse.
+Le message envoyé par le prouveur pour s’authentifier dépend à la fois d’une clé secrète, mais aussi d’un défi variable envoyé par le vérifieur. Lorsqu’un prouveur souhaite prouver son identité à un vérifieur, ce dernier lui envoie alors un défi (une valeur aléatoire par exemple) et le prouveur doit lui transmettre une réponse calculée à partir de ce défi spécifique
+(une signature de ce défi par exemple).
+
+Afin d’être considérée comme forte, une authentification doit reposer sur un protocole cryptographique permettant de résister à certaines attaques comme :
+✔️ L’écoute clandestine (eavesdroppping en anglais), qui consiste pour un attaquant à passivement
+écouter le canal de communication entre le prouveur et le vérifieur.
+✔️Les attaques par rejeu, qui consistent pour un attaquant à récupérer des informations d’authentification (comme un mot de passe ou son empreinte) et à utiliser ces informations pour les rejouer afin d’usurper l’identité de la cible (l’attaque pass-the-hash en est un exemple).
+✔️Les attaques de l’homme-du-milieu, qui consistent pour un attaquant à intercepter et modifier
+les communications se déroulant entre le prouveur et le vérifieur lors de l’authentification sans
+être détecté.
+✔️La non-forgeabilité : l’observation par un attaquant de plusieurs échanges d’authentification d’un
+prouveur ne doit pas lui permettre d’usurper son identité dans un nouvel échange d’authentification.
+
+Parmi les exemples d’authentification forte reposant sur un facteur de possession, on peut citer :
+✔️ L’authentification par certificats (stockés dans des cartes à puce par exemple).
+✔️ Les protocoles FIDO2 et FIDO U2F.
+✔️ Les protocoles d’OTP (One-Time Password) comme HOTP (HMAC-based OTP [32]), TOTP (Timebased OTP [34]) ou OCRA (OATH Challenge-Response Algorithm).
+
+Dans chacun de ces cas, le prouveur prouve son identité au vérifieur en démontrant indirectement
+la possession d’une clé cryptographique qui doit rester secrète.
+
+Parmi les exemples d’authentification forte reposant sur un facteur de connaissance, on peut citer :
+✔️ Le protocole Kerberos.
+✔️ Les protocoles de type PAKE (Password-Authenticated Key Agreement) comme SPAKE2 ou OPAQUE.
+
+On peut ainsi différencier une authentification multifacteur « faible » d’une authentification multifacteur forte lorsque cette dernière fait intervenir au moins un facteur d’authentification considéré comme fort.
