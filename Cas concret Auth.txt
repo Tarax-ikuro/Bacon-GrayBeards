@@ -1,0 +1,15 @@
+Nous devons distinguer 3 types de comptes : Le compte apprenant, le compte formateur et le compte administrateur.
+L'apprenant aura besoin d'un compte lui permettant d'effectuer ses formations, de suivre son évolution, de prendre des notes...
+Le formateur pourra poster des formations, corriger des exercices et suivre l'évolution de ses apprenants.
+L'administrateur quant à lui, doit avoir un accès lui permettant de visualiser l'ensemble des composants de la plateforme ainsi que d'effectuer des modifications (users, accès etc...).
+Pour cela, lors de la création du compte, il conviendra de distinguer le type de compte par exemple avec un boolean formateur/Administrateur, permettant de limiter les droits des apprenants.
+Lors de la création, l'intégralité des mots de passe seront hachés avant d'être stockés en BDD (type BCRYPT ou SHA 256/512 par exemple)
+Concernant l'authentification des apprenants, une authentification robuste suffit.
+Concernant l'authentification des formateurs, nous pouvons imaginer une authentification multifacteurs afin de sécuriser les données sensible des apprenants auxquelles ils ont accès, par le biais d'une vérification par mail lors de la connexion.
+Concernant l'accès des administrateurs, il faut impérativement une authentification multifacteur (vérification par mail également ou facteur de possession si necessaire type clé USB avec PIN dynamique).
+
+Nous pouvons imaginer également un système des session, enregistrée via des tokens d'authentifications, permettant aux utilisateurs de ne pas s'identifier à chaque connexion (ex JWT).
+Par mesure de sécurité, cette session aurait une durée de vie différente entre les apprenants et les formateurs, ces derniers devant à nouveau s'identifier plus régulièrement, toujours dans un souci de sécurisation des données sensibles concernant les apprenants.
+La session administrateur quant à elle ne permettrait pas de conserver un token et necessiterait une authentification à chaque connexion.
+Il conviendra également d'intégrer un AntiBruteForce sur le formulaire de login afin de verrouiller les tentatives de connexion via ce moyen.
+Enfin, nous pouvons enviseager une fonction de "Memory Hard" pour securiser d'autant plus les comptes des differents intervenants et permettant de ralentir les differentes tentatives de hacking des mots de passe.
